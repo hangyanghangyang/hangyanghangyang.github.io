@@ -1,0 +1,306 @@
+* {
+    box-sizing:border-box;
+    /* unify the measuring of weith and height */
+    margin: 0;
+    /* clean the default margin and padding at the beginning*/
+}
+
+body {
+    background-color: #232323;
+}
+
+:root {
+    /* apply to the base html document */
+    /* custom variable */
+    --colour-one:#ffffff;
+    --colour-two:#afafaf;
+    --colour-three:#565656;
+    --colour-four:#2b2b2b;
+    --colour-five: rgb(0, 13, 255);
+    --colour-six: rgba(0, 255, 234, 0.7);
+    --colour-seven: rgba(255, 0, 191, 0.7);
+    --colour-eight: rgb(162, 255, 0);
+    --border-one:2px solid #00ff73;
+    /* --border-two:solid 5px rgb(25, 0, 255); */
+    --border-image-one: linear-gradient(rgb(0, 255, 234), rgb(255, 0, 191)) 50/15px;
+}
+
+.grid-container {
+    background-color: #232323;
+    width: 52vw;
+    height: 70vw;
+    margin: 0 auto;
+    display: grid;
+    margin-top: 10vh;
+    margin-bottom: 10vh;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    /* fr = fraction 分数 */
+    /* grid container, grid item */
+}
+
+#box-one {
+    display: grid;
+    grid-row: 1/5;
+    grid-column: 1/6;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    /* border: 2px solid #fff; */
+}
+
+#box-one-one {
+    display: grid;
+    grid-row: 1/5;
+    grid-column: 1/4;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+}
+
+#box-one-two {
+    display: grid;
+    grid-row: 1/5;
+    grid-column: 4/6;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    /* background-color: var(--colour-four); */
+    /* border: 5px solid pink; */
+}
+
+#box-two {
+    display: grid;
+    grid-row: 5/8;
+    grid-column: 1/6;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+}
+
+.square {
+    /* border:5px solid #00ff73; */
+    /* background-color: var(--colour-three); */
+    /* background-image: linear-gradient(var(--colour-six), var(--colour-seven)); */
+    margin: 5%;
+    /* box-shadow: 
+        inset -8px -8px 4px var(--colour-four),
+        inset 8px 8px 4px var(--colour-two)
+    ; */
+
+
+    background: repeating-radial-gradient(rgb(43, 43, 43) 1%, rgb(27, 27, 27) 8%, rgb(36, 36, 36) 10%, black 10%);
+
+
+    box-shadow: /* inset -8px 0 2px rgba(0, 0, 0, 0.15), */
+        /* inset 0 -8px 2px rgba(0, 0, 0, 0.25), */
+        /* 0 0 0 2px rgba(0, 0, 0, 0.75), */
+        2px 2px 15px rgba(0, 0, 0, 1);
+    /* position: relative; */
+    /* overflow: hidden; */
+    border-radius: 5%;
+}
+/* .square::before {
+    content: '';
+    position: absolute;
+    order: 9999;
+    top: 15%;
+    left: 15%;
+    bottom: 20%;
+    right: 20%;
+    border-radius: 25%;
+    background: linear-gradient(90deg,#232323,#4a4a4a);
+    box-shadow: -8px -8px 20px rgba(255, 255, 255, 0.25),
+    10px 5px 15px rgba(0, 0, 0, 0.25);
+    border-left: 1px solid #0004;
+    border-bottom: 1px solid #0004;
+    border-top: 1px solid #0004;
+} */
+
+.square:hover {
+    box-shadow: 0px 0px 20px #00ff73;
+}
+
+/* .square:hover {
+    box-shadow: 
+        inset 6px 6px 5px var(--colour-four),
+        inset -2px -2px 8px var(--colour-two)
+    ;
+    background-image: linear-gradient(var(--colour-two), var(--colour-four));
+} */
+
+#square-1 {
+    border-top: var(--border-one);
+    border-left: var(--border-one);
+    background: conic-gradient(from 135deg, #00ff73, rgb(62, 62, 62) 50%, #232323 85%);
+}
+
+#square-2 {
+    border-top: var(--border-one);
+}
+
+#square-3,
+#square-14,
+#square-22,
+#square-30 {
+    border-top: var(--border-one);
+    border-right: var(--border-one);
+    border-top-right-radius: 50%;
+}
+
+#square-4,
+#square-7 {
+    border-left: var(--border-one);
+}
+
+#square-5 {
+    background-color: 232323;
+    margin: 5px;
+    background: conic-gradient(from 135deg, #00ff73, rgb(62, 62, 62) 50%, #232323 85%);
+}
+
+#square-6,
+#square-9 {
+    border-right: var(--border-one);
+}
+
+#square-10,
+#square-27,
+#square-31,
+#square-35 {
+    border-left: var(--border-one);
+    border-bottom: var(--border-one);
+    border-bottom-left-radius: 50%;
+}
+
+#square-11,
+#square-12 {
+    border-bottom: var(--border-one);
+}
+
+#square-19,
+#square-25,
+#square-28,
+#square-34 {
+    border-bottom: var(--border-one);
+    border-right: var(--border-one);
+    border-bottom-right-radius: 50%;
+}
+
+#square-13,
+#square-21,
+#square-23,
+#square-29 {
+    border-top: var(--border-one);
+    border-left: var(--border-one);
+    border-top-left-radius: 50%;
+}
+
+#square-15,
+#square-16,
+#square-17,
+#square-18,
+#square-20,
+#square-26 {
+    border-left: var(--border-one);
+    border-right: var(--border-one);
+}
+
+#square-24,
+#square-32,
+#square-33 {
+    border-top: var(--border-one);
+    border-bottom: var(--border-one);
+}
+
+#square-12 {
+    background: conic-gradient(from 90deg, #00ff73, rgb(62, 62, 62) 50%, #232323 85%);
+}
+
+#square-13 {
+    background: conic-gradient(from 90deg, #00ff73, rgb(62, 62, 62) 50%, #232323 85%);
+}
+
+#square-14 {
+    background: conic-gradient(from 180deg, #00ff73, rgb(62, 62, 62) 50%, #232323 85%);
+}
+
+#square-15 {
+    background: conic-gradient(from 0deg, #00ff73, rgb(62, 62, 62) 50%, #232323 85%);
+}
+
+#square-16 {
+    background: conic-gradient(from 180deg, #00ff73, rgb(62, 62, 62) 50%, #232323 85%);
+}
+
+#square-17 {
+    background: conic-gradient(from 0deg, #00ff73, rgb(62, 62, 62) 50%, #232323 85%);
+}
+
+#square-18 {
+    background: conic-gradient(from 180deg, #00ff73, rgb(62, 62, 62) 50%, #232323 85%);
+}
+
+#square-19 {
+    background: conic-gradient(from 0deg, #00ff73, rgb(62, 62, 62) 50%, #232323 85%);
+}
+
+#square-20 {
+    background: conic-gradient(from 180deg, #00ff73, rgb(62, 62, 62) 50%, #232323 85%);
+}
+
+#square-21 {
+    background: conic-gradient(from 180deg, #00ff73, rgb(62, 62, 62) 80%, #232323 85%);
+}
+
+#square-22 {
+    background: conic-gradient(from -90deg, #00ff73, rgb(62, 62, 62) 50%, #232323 85%);
+}
+
+#square-23 {
+    background: conic-gradient(from 180deg, #00ff73, rgb(62, 62, 62) 50%, #232323 85%);
+}
+
+#square-24 {
+    background: conic-gradient(from -90deg, #00ff73, rgb(62, 62, 62) 50%, #232323 85%);
+}
+
+#square-25 {
+    background: conic-gradient(from -90deg, #00ff73, rgb(62, 62, 62) 50%, #232323 85%);
+}
+
+#square-26 {
+    background: conic-gradient(from 180deg, #00ff73, rgb(62, 62, 62) 50%, #232323 85%);
+}
+
+#square-27 {
+    background: conic-gradient(from 0deg, #00ff73, rgb(62, 62, 62) 50%, #232323 85%);
+}
+
+#square-28 {
+    background: conic-gradient(from -90deg, #00ff73, rgb(62, 62, 62) 50%, #232323 85%);
+}
+
+#square-29 {
+    background: conic-gradient(from 90deg, #00ff73, rgb(62, 62, 62) 50%, #232323 85%);
+}
+
+#square-30 {
+    background: conic-gradient(from 180deg, #00ff73, rgb(62, 62, 62) 50%, #232323 85%);
+}
+
+#square-31 {
+    background: conic-gradient(from 90deg, #00ff73, rgb(62, 62, 62) 50%, #232323 85%);
+}
+
+#square-32 {
+    background: conic-gradient(from 90deg, #00ff73, rgb(62, 62, 62) 50%, #232323 85%);
+}
+
+#square-33 {
+    background: conic-gradient(from 90deg, #00ff73, rgb(62, 62, 62) 50%, #232323 85%);
+}
+
+#square-34 {
+    background: conic-gradient(from 0deg, #00ff73, rgb(62, 62, 62) 50%, #232323 85%);
+}
+
+#square-35 {
+    background: conic-gradient(from 90deg, #00ff73, rgb(62, 62, 62) 50%, #232323 85%);
+}
