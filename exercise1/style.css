@@ -1,0 +1,299 @@
+* {
+    /* To unify the measuring of width and height. */
+    box-sizing:border-box;
+    /* To clean the default margin for the whole page at the beginning */
+    margin: 0;
+}
+
+body {
+    /* To apply background colour for the whole visible area of the webpage. */
+    background-color: var(--colour-bg);
+}
+
+:root {
+    /* To set up custom variables and apply them to the base document */
+
+    /* I chose a restrictive colour palette of four colours for my web page to keep the page clean and clear. 
+    
+    Contrasting bright green and dark grey are the two main colours. Dark grey is used as the base colour to set off the body content and other colours on the web page. Bright green is used as the highlight colour to visually emphasize the important content and quickly draw viewers' attention. The contrast of these two colours will make the web page legible and dynamic.
+
+    The other two colours are mainly used to complement other colours. A lighter grey is used as a transition colour when creating gradients. It will make the gradient look softer and more comfortable. Black is used as the colour of the drop shadow to set off the content. */
+    --colour-bg:#232323;
+    --colour-main:#00ff73;
+    --colour-gradient: #434343;
+    --colour-shadow: #000;
+
+    /* I also create a variable for the border style. In this spatial layout, borders help to group visual elements and guide the viewer's eye. It integrates squares into a 'road' that allows the audience to read them in a certain order. So, I chose clear 3px solid lines with bright green as the border style of the web page. */
+    --border-main: 3px solid #00ff73;
+
+    /* I also set up a border radius. This spatial layout will use a lot of same-sized rounded corners in different parts of different rectangles. Setting up the border radius as a variable will make it easier to apply. */
+    --border-radius: 50%;
+
+    /* The gap between squares is also one of the most important factors in defining this spatial layout. Different sized gaps form different proximities, thereby visually implying reading order. I set two variables, a smaller gap and a bigger gap. Their contrast will create a subtle tension, helping to group elements on the web page. */
+    --margin-large-gap: 10%;
+    --margin-small-gap: 3%;
+}
+
+#grid-container {
+    /* I set the width and height of the grid container to be based on the view width. This makes it impossible to see the entire content at once when the display is too wide. However, this is to maintain the ratio of the layout while making the page responsive. As this spatial layout is divided into a bunch of small squares, the overall layout will be affected once the ratio is destroyed. */
+    width: 61vw;
+    height: 80vw;
+    /* To horizontally centre the grid container on the webpage */
+    margin: 0 auto;
+    margin-top: 15vh;
+    margin-bottom: 20vh;
+    /* To make this element a grid container so that all its children elements become grid items. */
+    display: grid;
+    /* As the small squares in the layout are all the same size, I create flexible grid tracks, which equally divide the grid into five columns and seven rows. */
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(7, 1fr);
+}
+
+#box-one {
+    /* Precisely place the grid box on the top of the grid container */
+    grid-row: 1/5;
+    grid-column: 1/6;
+    /* To make this grid box a grid container as well so that all the small squares will become grid items. */
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+}
+
+#box-one-left {
+    /* Precisely place this container on the left of the grid box-one */
+    grid-row: 1/5;
+    grid-column: 1/4;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+}
+
+#box-one-right {
+    /* Precisely place this container on the right of the grid box-one */
+    display: grid;
+    grid-row: 1/5;
+    grid-column: 4/6;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+}
+
+#box-two {
+    /* Precisely place this container on the bottom of the grid container */
+    grid-row: 5/8;
+    grid-column: 1/6;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+}
+
+.square {
+    /* I first set up a uniform style for all the small squares through the variables created earlier: dark grey, glow, black and soft drop shadows, and uniform small gaps.*/
+
+    /* Strong colour contrast can make the layout clearer. The green on the grey creates a glowing visual effect, and I wanted to use that to design a sci-fi style. */
+    background-color: var(--colour-bg);
+    /* Shadows can help emulate a sense of dimension, helping to highlight the layout and make it appear more vivid. */
+    box-shadow: 0px 0px 5px var(--colour-main),
+    12px 25px 25px var(--colour-shadow);
+    /* Margins help separate the small squares. To make all the squares look like a group, I just used a small margin at this stage. */
+    margin: var(--margin-small-gap);
+}
+
+.square:hover {
+    /* Due to the complexity of this layout, I created a hover glow effect to let the user know where they are seeing or where their cursor is pointing. */
+    box-shadow: 0px 0px 40px var(--colour-main);
+}
+
+/* Then I added rounded corners to each square. To make the code clear and simple, I group together squares with the same rounded corners and add style together. */
+#square-1,
+#square-4,
+#square-7,
+#square-10,
+#square-13,
+#square-15,
+#square-16,
+#square-17,
+#square-18,
+#square-20,
+#square-21,
+#square-23,
+#square-26,
+#square-27,
+#square-29,
+#square-31,
+#square-35 {
+    border-left: var(--border-main);
+}
+
+#square-1,
+#square-2,
+#square-3,
+#square-13,
+#square-14,
+#square-21,
+#square-22,
+#square-23,
+#square-24,
+#square-29,
+#square-30,
+#square-32,
+#square-33 {
+    border-top: var(--border-main);
+}
+
+#square-3,
+#square-6,
+#square-9,
+#square-14,
+#square-15,
+#square-16,
+#square-17,
+#square-18,
+#square-19,
+#square-20,
+#square-22,
+#square-25,
+#square-26,
+#square-28,
+#square-30,
+#square-34 {
+    border-right: var(--border-main);
+}
+
+#square-10,
+#square-11,
+#square-12,
+#square-19,
+#square-24,
+#square-25,
+#square-27,
+#square-28,
+#square-31,
+#square-32,
+#square-33,
+#square-34,
+#square-35 {
+    border-bottom: var(--border-main);
+}
+
+#square-5 {
+    margin: var(--margin-small-gap);
+    border-radius: 5%;
+}
+
+#square-3,
+#square-14,
+#square-22,
+#square-30  {
+    border-top-right-radius: var(--border-radius);
+}
+
+#square-10,
+#square-27,
+#square-31,
+#square-35 {
+    border-bottom-left-radius: var(--border-radius);
+}
+
+#square-19,
+#square-25,
+#square-28,
+#square-34 {
+    border-bottom-right-radius: var(--border-radius);
+}
+
+#square-13,
+#square-21,
+#square-23,
+#square-29 {
+    border-top-left-radius: var(--border-radius);
+}
+
+/* I found out that the original image is leading the reading order by using the colour and the direction of the character's movements. Inspired by that, I chose conic gradient for my web page. I used the direction of the boundary between different colours to guide the reading order. Also, this strong contrast gradient produces a metallic texture, which matches the style I want to create. */
+#square-1,
+#square-5 {
+    background: conic-gradient(from 135deg, var(--colour-main), var(--colour-gradient) 50%, var(--colour-bg) 85%);
+}
+
+#square-9,
+#square-14,
+#square-16,
+#square-18,
+#square-20,
+#square-21,
+#square-23,
+#square-26,
+#square-30 {
+    background: conic-gradient(from 180deg, var(--colour-main), var(--colour-gradient) 50%, var(--colour-bg) 85%);
+}
+
+#square-12,
+#square-13,
+#square-29,
+#square-31,
+#square-32,
+#square-33,
+#square-35 {
+    background: conic-gradient(from 90deg, var(--colour-main), var(--colour-gradient) 50%, var(--colour-bg) 85%);
+}
+
+#square-15,
+#square-17,
+#square-19,
+#square-27,
+#square-34 {
+    background: conic-gradient(from 0deg, var(--colour-main), var(--colour-gradient) 50%, var(--colour-bg) 85%);
+}
+
+#square-22,
+#square-24,
+#square-25,
+#square-28 {
+    background: conic-gradient(from -90deg, var(--colour-main), var(--colour-gradient) 50%, var(--colour-bg) 85%);
+}
+
+/* To make the reading order and layout structure clear and obvious, I appropriately added some large gaps between small squares. The elements in this layout are all the same size, so I need to lead the viewers' eyes by adjusting the proximity. */
+#square-3,
+#square-6,
+#square-9,
+#square-15,
+#square-17,
+#square-19,
+#square-22,
+#square-26,
+#square-34,
+#square-28 {
+    margin-right: var(--margin-large-gap);
+}
+
+#square-15,
+#square-13,
+#square-16,
+#square-17,
+#square-18,
+#square-20,
+#square-23,
+#square-27,
+#square-29,
+#square-35 {
+    margin-left: var(--margin-large-gap);
+}
+
+#square-10,
+#square-11,
+#square-12,
+#square-19,
+#square-27,
+#square-28 {
+    margin-bottom: var(--margin-large-gap);
+}
+
+#square-21,
+#square-22,
+#square-23,
+#square-24,
+#square-29,
+#square-30,
+#square-32,
+#square-33 {
+    margin-top: var(--margin-large-gap);
+}
