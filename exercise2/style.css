@@ -1,0 +1,548 @@
+*{
+  box-sizing: border-box;
+  background-origin: border-box;
+  margin: 0;
+  /* The sans-serif matches the minimalist style of this website better. */
+  font-family: sans-serif;
+}
+
+:root{
+  /* The colour palette is inspired by the style of some of Haruomi Hosono's music album covers, as well as the colours of  vinyl records. */
+  /* Some colours in the palette are repeated so that different elements of the same colour can be transformed into different colours when making night mode. */
+  --col-01:#d3b59d;
+  --col-02:#fff8ef;
+  --col-03:#f17c78;
+  --col-04:#fcd2cc;
+  --col-05:#3f3f3f;
+  --col-text:#3f3f3f;
+  --col-switchMode-text:#3f3f3f;
+  --col-sect-shad:#493030;
+  --col-title:#3f3f3f;
+  --col-a:#f17c78;
+  --col-a-hover:#cb4c4c;
+  --col-a-click:#5b2c2c;
+  --col-nav-shad:#000;
+  --col-nav-shad-hover:#cc5656;
+  --col-nav-shad-active:#c99e99;
+  --col-nav-lgt:#6c6c6c;
+  --col-nav-lgt-hover:#f4abab;
+  --col-nav-lgt-active:#f7eceb;
+  --col-nav-text:#fff8ef;
+
+  /* Before the switch-mode button was completed, I made a normal button, but I found that it didn't look as direct and easy to understand as a switch button. The three colours in this comment are the colours of the discarded button. I keep them so I can try a different solution. */
+
+  /* --col-btn-text:#fff8ef;
+  --col-btn-shad1:#d6c2b2;
+  --col-btn-shad2:#bca28d; */
+  font-size: 16px;
+}
+
+body{
+  background-color: var(--col-01);
+  color: var(--col-text);
+  /* Using the transition to slower the alternation of background colours to avoid discomfort caused by sudden colour changes when switching to night mode */
+  transition: background-color ease-in .8s;
+}
+
+header {
+  float: left;
+  padding-right: 10%;
+  margin-left: 25%;
+  margin-top: 10%;
+}
+
+/* Switch-mode button */
+.switch {
+  float: left;
+  width: 60px;
+  height: 34px;
+  position: relative;
+  margin-top: 30px;
+}
+
+.switch input {
+  display: none;
+}
+
+#modeText {
+  position: absolute;
+  color: var( --col-switchMode-text);
+  font-weight: 700;
+  line-height: 34px;
+  margin-left: 70px;
+  transition: color ease-in .8s;
+}
+
+.slider {
+  position: absolute;
+  /* Turn the cursor into the pointer when hovering or clicking on the button, indicating the possible interaction. */
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--col-02);
+  border-radius: 34px;
+  transition: .8s;
+}
+
+.slider::before {
+  content: '';
+  left: 4px;
+  bottom: 4px;
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  background-color: var(--col-01);
+  border-radius: 50%;
+  transition: ease-in .4s;
+}
+
+input:checked + .slider {
+  background-color: var(--col-nav-lgt);
+  transition: background-color ease-in .8s;
+}
+
+input:checked + .slider::before {
+  /* Using transofrm and transition to let the slider of the switch button smoothly moving left and right. */
+  transform: translateX(26px);
+  transition: ease-in .4s;
+}
+
+/* The code in this comment are the colours of the discarded button mentioned above. I keep them so I can try a different solutions. */
+/* button {
+  float: left;
+  font-size: 16px;
+  outline: none;
+  width: 120px;
+  height: 50px;
+  color: var(--col-btn-text);
+  border-radius: 50px;
+  background-color: var(--col-01);
+  margin-top: 5%;
+  box-shadow:
+  -5px -5px 5px var(--col-btn-shad1),
+  5px 5px 5px var(--col-btn-shad2);
+  border: 4px solid var(--col-01);
+  cursor: pointer;
+}  */
+
+/* button:active {
+  box-shadow:
+  -5px -5px 5px var(--col-btn-shad1),
+  5px 5px 5px var(--col-btn-shad2),
+  inset -8px -8px 8px var(--col-btn-shad1),
+  inset 5px 5px 5px var(--col-btn-shad2);
+} */
+
+/* Navigation bar */
+/* A vertical navbar is more suitable for this page than a horizontal one because this website is an encyclopedia page with lots of text, and the navbar is here to jump to different parts on the same page rather than jumping to a new page. When we view a website, we usually read and scroll from top to bottom instead of turning pages from left to right like reading a physical book. The vertical navbar is matching this reading habit. At the same time, the vertical navbar can also potentially let users know which part of the page they are reading and how much is left (like bookmarks can indicate the reading progress). This can reduce boredom and confusion when users read a large amount of text.
+
+This 3D-style navbar is inspired by physical music albums in the real world. It is also somewhat like archives, from which documents can be retrieved.
+
+The hover animation is mimicking this real-world interaction of, for example, pulling an album out of a cabinet, or pulling a document out of an archive. I want this website to be familiar, comfortable, and interesting for users. In addition, I also highlighted the part where the mouse hovers with pink to help show the interaction hint. In reduce motion mode, the hover animation will be removed but the colour change can continue to maintain the effectiveness of the hover interaction.
+
+The colour change when clicking is to tell users the interaction is effective. After changing from dark grey to bright pink when hovering, lightening the colour looks smoother and more comfortable than darkening. In addition, it can help the user to see the feasibility and effectiveness of the interaction on touchscreen devices (without hover).
+*/
+
+#nav {
+  list-style-type: none;
+  position: fixed;
+  width: 20vw;
+  height: 100vh;
+  padding-left: 0;
+  margin-top: 15%;
+  /* Using transform to skew the navbar to create 3D visual style. */
+  transform: skewY(-15deg);
+  transition: background-color ease-in .8s;
+}
+
+#nav li {
+  position: relative;
+  margin-left: 50px;
+  margin-right: 0px;
+  margin-bottom: 2px;
+  /* To control the layer order of each blocks. */
+  z-index: calc(1 * var(--i));
+  transition: ease-in .8s;
+}
+
+#nav li:last-child::after {
+  /* To create a drop shadow for the navbar to enhance the 3D sense. */
+  box-shadow: -150px 150px 30px rgba(0, 0, 0, .8);
+}
+
+#nav li a {
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  background-color: var(--col-05);
+  color: var(--col-nav-text);
+  font-size: 20px;
+  line-height: 60px;
+  text-align: center;
+  /* Using transition to smoother the colour change. */
+  transition: ease-in .2s;
+}
+
+#nav li:hover {
+  /* Using transform to create the hover animation. */
+  transform: translateX(50px);
+}
+
+#nav li a:hover {
+  /* Colour highlight when hovering. */
+  background-color: var(--col-03);
+  /* Using transition to smoother the colour change. */
+  transition: ease-in .2s;
+  
+}
+
+#nav li a:active {
+  /* Colour change, indicating the effectiviness of clicking. */
+  background-color: var(--col-04);
+  color: var(--col-05);
+}
+
+#nav li::before {
+  content: '';
+  top: 0;
+  left: -20px;
+  position: absolute;
+  width: 20px;
+  height: 100%;
+  background: var(--col-nav-shad);
+  /* Using transform to skew the pseudo-element to create 3D style. */
+  transform-origin: right;
+  transform: skewY(45deg);
+  /* Using transition to smoother the colour change. */
+  transition: ease-in 0.2s;
+}
+
+#nav li:hover::before {
+  background-color: var(--col-nav-shad-hover);
+}
+
+#nav li:active::before {
+  background-color: var(--col-nav-shad-active);
+}
+
+#nav li::after {
+  content: '';
+  top: -20px;
+  left: 0;
+  position:absolute;
+  width: 100%;
+  height: 20px;
+  background-color: var(--col-nav-lgt);
+  /* Using transform to skew the pseudo-element to create 3D style. */
+  transform-origin: bottom;
+  transform: skewX(45deg);
+  /* Using transition to smoother the colour change. */
+  transition: ease-in 0.2s;
+}
+
+#nav li:hover::after {
+  background-color: var(--col-nav-lgt-hover);
+}
+
+#nav li:active::after {
+  background-color: var(--col-nav-lgt-active);
+}
+
+/* Main body */
+main {
+  float: left;
+  margin-left: 25%;
+  margin-right: 5%;
+  margin-bottom: 5%;
+  color: var(--col-text);
+  transition: color ease-in .8s;
+}
+
+section{
+  /* This website is more of a minimalist style, so I simply made a concise background for each section, which makes it easier for the users to read lots of text. */
+  margin-right: 2em;
+  margin-top: 2em;
+  padding: 5%;
+  background-color: var(--col-02);
+  border-radius: 30px;
+  box-shadow: 15px 15px 30px var(--col-sect-shad);
+  /* Using the transition to slower the alternation of background colours to avoid discomfort caused by sudden colour changes when switching to night mode */
+  transition: background-color ease-in .8s;
+}
+
+/* ‘a’ links in the main body */
+a {
+  /* Indicating links by applying a different colour to the 'a' tag in the body paragraph. I try to highlight the link, but try not to make the colour too contrasting to affect the reading. */
+  color: var(--col-03);
+  /* Clear the default underline of the link to make the page look clean and tidy, and match the minimalist style. */
+  text-decoration: none;
+}
+
+a:hover {
+  /* Darken the colour when hovering. Indicate that users can interact with this links. */
+  /* Also, I keep the default cursor, which is the pointer, of the 'a' link. It can help to hint at the interaction. */
+  color: var(--col-a-hover);
+}
+
+a:active {
+  /* Darken the colour more when clicking. To create a comfortable and effective interaction hint. */
+  color: var(--col-a-click);
+}
+
+h1{
+  font-size: 3rem;
+  color: var(--col-text);
+  /* Using transition to slower the alternation of text colours to avoid discomfort caused by sudden colour changes when switching to night mode */
+  transition: color ease-in .8s;
+}
+
+h2{
+  font-size: 2rem;
+  color: var(--col-text);
+  margin-bottom: 1rem;
+  /* Again, using transition to slower the alternation of text colours to avoid discomfort caused by sudden colour changes when switching to night mode */
+  transition: color ease-in .8s;
+}
+
+p{
+  font-size: 1rem;
+  margin: 5%
+}
+
+figcaption{
+  width: fit-content;
+}
+
+dl ul{
+  margin-bottom: 0;
+}
+
+li{
+  font-size: 1rem;
+}
+
+dd{
+  padding-left: 60px;
+}
+
+li ul{
+  padding-left: 40px;
+}
+
+.img-wrapper{
+  width: 80%;
+  margin-bottom: 1.5rem;
+}
+
+figure {
+  margin-left: 1.5rem;
+}
+
+.img-figure{
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+}
+
+.article-img{
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.res-columns{
+  column-width: 25rem;
+}
+
+/* I also tried designing responsive effects for different screens. */
+/* small devices */
+@media only screen and (min-width: 320px) {
+  :root{
+    font-size: 10px;
+    line-height: 1.5em;
+  }
+  .img-wrapper{
+    width: 75%;
+    margin: 1.5rem auto;
+  }
+  #nav {
+    width: 30%;
+    margin-top: 45px;
+  }
+  #nav li {
+    position: relative;
+    margin-left: 30%;
+    margin-right: 0%;
+  }
+  #nav li:hover {
+    transform: translateX(10px);
+  }
+  #nav li a {
+    font-size: 10px;
+    line-height: 1.5em;
+    padding: 0;
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
+  header {
+    margin-left: 36%;
+    margin-top: 30px;
+  }
+  main {
+    margin-left: 36%;
+  }
+  h1 {
+    font-size: 25px;
+    line-height: 1em;
+  }
+}
+
+/* medium devices 1 */
+@media only screen and (min-width: 400px) {
+  :root{
+    font-size: 12px;
+    line-height: 1.5em;
+  }
+  .img-wrapper{
+    width: 75%;
+    margin: 1.5rem auto;
+  }
+  #nav {
+    width: 30%;
+    margin-top: 80px;
+  }
+  #nav li {
+    position: relative;
+    transition: 0.1s;
+    margin-left: 30%;
+    margin-right: 0;
+  }
+  #nav li:hover {
+    transform: translateX(10px);
+  }
+  #nav li a {
+    font-size: 12px;
+    padding: 0px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
+  header {
+    margin-left: 35%;
+    margin-top: 50px;
+  }
+  main {
+    margin-left: 35%;
+  }
+  h1 {
+    font-size: 30px;
+    line-height: 1em;
+  }
+}
+
+/* medium devices 2 */
+@media only screen and (min-width: 600px) {
+  :root{
+    font-size: 16px;
+  }
+  .img-wrapper{
+    width: 75%;
+    margin: 1.5rem auto;
+  }
+  #nav {
+    width: 27%;
+    margin-top: 120px;
+  }
+  #nav li {
+    position: relative;
+    transition: 0.1s;
+    margin-left: 8vw;
+    margin-right: 0vw;
+  }
+  #nav li:hover {
+    transform: translateX(20px);
+  }
+  #nav li a {
+    font-size: 15px;
+    line-height: 1.5em;
+    padding: 10px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+  header {
+    margin-left: 32%;
+    margin-top: 80px;
+  }
+  main {
+    margin-left: 32%;
+  }
+  h1 {
+    font-size: 40px;
+  }
+}
+
+/* large devices */
+@media only screen and (min-width: 900px) {
+  :root{
+    font-size: 20px;
+  }
+  .img-wrapper{
+    max-width: fit-content;
+    margin: 1.5rem;
+  }
+  #nav li a {
+    font-size: 20px;
+    line-height: 2em;
+  }
+  #nav {
+    width: 22%;
+    margin-top: 120px;
+  }
+  #nav li {
+    position: relative;
+    transition: 0.1s;
+    margin-left: 6vw;
+    margin-right: 2vw;
+  } 
+  #nav li:hover {
+    transform: translateX(30px);
+  }
+  #nav li a {
+    font-size: 16px;
+    line-height: 1.5em;
+    padding: 10px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
+  header {
+    margin-left: 25%;
+  }
+  main {
+    margin-left: 25%;
+  }
+  h1 {
+    font-size: 60px;
+  }
+  section {
+    padding: 1em;
+  }
+}
+
+/* Reduce motion mode. Reduce some excessive interactions, making it easier for users who are uncomfortable with complex interactions.*/
+@media (prefers-reduced-motion) {
+  /* In this mode, the hover animation of the navbar is removed */
+  #nav li:hover {
+    transform: translateX(0);
+  }
+  /* No delay in the color change of the hover animation, the interaction is conciser. */
+  #nav li a:hover,
+  #nav li:hover::before,
+  #nav li:hover::after {
+    transition: 0s;
+  }
+}
+
+
