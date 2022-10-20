@@ -1,0 +1,338 @@
+/* I first use universal selector to clear the default styles of margin and padding of the page. I draw this hand cursor and the its clicked version in Adobe Illustrator. Then, I use the cursor property to customise the cursor's style. Changing the default cursor to a hand is to simulate the motion of a hand picking up shells, making the interaction more interesting and immersive. */
+* {
+    cursor: url('img/hand.png'), auto;
+    margin: 0;
+    padding: 0;
+}
+*:active{
+    cursor: url('img/hand1.png'), auto;
+}
+/* Declare the colour palette at the beginning. */
+:root {
+    --colour-1: #cc420d;
+    --colour-2: #fff8d7;
+    --colour-3: #fc7843;
+}
+body{
+    overflow: hidden;
+}
+/* Put the GIF animation in the correct position and hide it. */
+.gifBox{
+    display: none;
+    position: relative;
+    width: 800px;
+    height: 50px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+.gifBox img{
+    width: 100%;
+}
+
+/**
+I use keyframes to animate a shell falling on a necklace. If it just appears on the necklace, it may be difficult for users to notice. So adding an animation can make the feedback more obvious. It can also make the page more interesting and dynamic. I keep both codes with @-webkit-  and without @-webkit- for compatibility with different browsers.
+ */
+@keyframes hide {
+       0% {
+           opacity: 1;
+       }
+       50% {
+           opacity: 0.5;
+       }
+       100% {
+           opacity: 0;
+       }
+}
+@keyframes show {
+       0% {
+           opacity: 0;
+       }
+       50% {
+           opacity: 0.5;
+       }
+       100% {
+           opacity: 1;
+       }
+}
+.show{
+    /* 调用动画 */
+    animation-name: show;
+    /* 持续时间 */
+    animation-duration: .3s;
+}
+.hide{
+    animation-name: hide;
+    animation-duration: .3s;
+}
+.anima {
+    -webkit-animation: yAxis 1s ease-in;;
+    animation: yAxis 1s ease-in;
+    position:relative;
+    animation-fill-mode:forwards;
+}
+/* Using keyframes to create parallax animation in y-axis direction */
+@-webkit-keyframes yAxis {
+    50% {
+        opacity: 0;
+        -webkit-animation-timing-function: ease-out;
+        animation-timing-function: ease-out;
+        -webkit-transform: translateY(100px);
+        transform: translateY(100px);
+    }
+    to {
+        opacity: 1;
+        -webkit-transform: translateY(150px);
+        transform: translateY(150px);
+    }
+}
+@keyframes yAxis {
+    50% {
+        opacity: 0;
+        -webkit-animation-timing-function: ease-out;
+        animation-timing-function:ease-out;
+        -webkit-transform: translateY(150px);
+        transform: translateY(150px);
+    }
+    to {
+        -webkit-transform: translateY(150px);
+        transform: translateY(150px);
+        opacity: 1;
+    }
+}
+/* I create the animation of the shells appearing and disappearing(like a breathing animation) using keyframes. It can be applied to different groups of shells in JavaScript to create the effect of alternating display. */
+@keyframes breathe {
+    0%{
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+    75% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+/* Setting the position of the shell hanging on the necklace */
+.mount1{
+    position: absolute;
+    top: -116px;
+    left: 113px;
+}
+.mount2{
+    position: absolute;
+    top: -60px;
+    left: 202px;
+}
+.mount3{
+    position: absolute;
+    top: -32px;
+    left: 356px;
+}
+.mount4{
+    position: absolute;
+    top: -58px;
+    left: 502px;
+}
+.mount5{
+    position: absolute;
+    top: -126px;
+    left: 604px;
+}
+/* Set the style of the popup: */
+.modalBox{
+    /* Making it invisible at first, then using JavaScript to control its display */
+    display: none;
+    /* Control its position */
+    position: fixed;
+    width: 437px;
+    height: 285px;
+    top: 50%;
+    left: 50%;
+    /* Center the popup window on the page */
+    transform: translate(-50%, -50%);
+    /* Call the previously declared colour and set the font style */
+    background: var(--colour-2);
+    border-radius: 60px;
+    border-bottom: 10px solid var(--colour-1);
+    font-family:'Times New Roman', Times, serif;
+    font-size: 20px;
+    font-weight: 600;
+    text-align: center;
+    color: var(--colour-1);
+}
+/* Set the style of the content in the popup window: */
+.modalBox .con{
+    position: relative;
+    top: 50%;
+    /* Center everything in the popup */
+    transform: translateY(-50%);
+    padding-bottom: 6px;
+}
+/* Set the style of the popup prompt text */
+.modalBox .con p{
+    margin-bottom: 30px;
+    line-height: 36px;
+    top: -20px;
+    position: relative;
+}
+/* Set the style and position of the button, and add a hover effect to the button to clearly indicate that the user can click here */
+.modalBox .btn{
+    position: relative;
+}
+.modalBox .con button{
+    border: none;
+    background: var(--colour-3);
+    padding: 15px 25px;
+    border-radius: 15px;
+    color: var(--colour-2);
+    font-size: 16px;
+    font-weight: 600;
+    font-family:'Times New Roman', Times, serif;
+    outline: none;
+    min-width: 131px;
+    margin-right: 35px;
+    position: absolute;
+}
+.modalBox .con button:hover{
+    border-bottom: 5px solid var( --colour-1);
+}
+
+.modalBox .con button:first-child{
+    right: 215px;
+}
+
+.modalBox .con button:last-child{
+    margin-right:0;
+    right: 55px;
+}
+
+/* Pin the background video to the whole page and make it full screen.
+I didn't choose to make this website responsive, because the only way to maximise the immersive experience was to experience this web page in a normal sized window. */
+.video-background{
+    position: fixed;
+    width: 100%;
+}
+
+/* The size and style of the shells are uniformly set. */
+.shells {
+    width: 70px;
+    height: 70px;
+    position: absolute;
+    overflow: hidden;
+}
+
+.shells img {
+    width: 70px;
+    height: 70px;
+    filter: drop-shadow(var(--colour-1) 3px 3px 0px);
+}
+
+/* Added a hover effect to prompt the user to click to interact. */
+.shells img:hover {
+    width: 80px;
+    height: 80px;
+}
+.shells:hover {
+    width: 80px;
+    height: 80px;
+}
+
+/* Then, I set the position of each shell on the page using the id name of the shell. */
+#shell_1 {
+    top: 508px;
+    left: 280px;
+}
+
+#shell_2 {
+    top: 438px;
+    left: 450px;
+}
+
+#shell_3 {
+    top: 600px;
+    left: 430px;
+}
+
+#shell_4 {
+    top: 400px;
+    left: 650px;
+}
+
+#shell_5 {
+    top: 500px;
+    left: 700px;
+}
+
+#shell_6 {
+    top: 600px;
+    left: 630px;
+}
+
+#shell_7 {
+    top: 420px;
+    left: 850px;
+}
+
+#shell_8 {
+    top: 630px;
+    left: 790px;
+}
+
+#shell_9 {
+    top: 410px;
+    left: 1000px;
+}
+
+#shell_10 {
+    top: 550px;
+    left: 950px;
+}
+
+#shell_11 {
+    top: 500px;
+    left: 1100px;
+}
+
+#shell_12 {
+    top: 610px;
+    left: 1150px;
+}
+
+#shell_13 {
+    top: 520px;
+    left: 1280px;
+}
+
+#shell_14 {
+    top: 560px;
+    left: 1380px;
+}
+
+/* In the same way, set the position of the foreground plant and necklace string on the page. */
+.tree {
+    position: absolute;
+    top: 0%;
+    right: 0%;
+    overflow: hidden;
+    width: 1920px;
+}
+
+.tree img {
+    height: 100vh;
+    width: 100%;
+}
+
+.necklace {
+    width: 800px;
+    height: 200px;
+    position: absolute;
+    top: 0%;
+    left: 50%;
+    margin-left: -400px;
+}
+.necklace img {
+    width: 100%;
+}

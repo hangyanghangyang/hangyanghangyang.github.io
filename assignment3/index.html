@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+        <!-- General Explanation of the Code: -->
+        <!-- The graphic elements, background animations, and music were made in Adobe Illustrator and After Effects. And then I used code to position and hide&show these elements, and add some suitable interactions. HTML and CSS are mainly used to place elements in the proper position on the page, add styles to the popup, and add simple interactions and feedback. Most of the effects are implemented in JavaScript, including creating click events, checking shell's amount on the necklace, listening and calculating mouse movements to form parallax effect, alternating the display of the shells, etc. -->
+
+        <!-- General Explanation of the Design Choices: -->
+        <!-- My metaphor is "website as picking up shells on the beach and stringing them into necklaces". I want my web pages to be peaceful, comfortable, fresh, and enjoyable. I want to give the user an experience like walking slowly by the sea with the sea breeze and sometimes leaning over and picking up a beautiful shell. So I chose a minimalist flat design style and soothing and slow music. I made the colours of the background gradually change from day to night like a real-world sky, and then loop it to simulate a real environment. The alternating display of shells simulates the waves washing up different seashells to the beach. All in all, I want to give people the same experience as the real world while keeping the website very minimalist.
+        Music and sound effects are all from YouTube Audio Library and freesound.org. Visual elements are made by myself.
+        -->
+
+
+        <!-- I added background music and sound effects for the website. Also, I added autoplay and loops to the audio tag, and hidden the control bar. I combined two different pieces of music, one is matching the brighter part of the background environment and one is matching the darker background environment, and also added ambient sound effects of waves and seagulls to create the sense of immersion. -->
+        <audio controls autoplay loop style="display:none;"><source src="./music.mp3"></audio>
+        <!-- The sound effect of the picking up shells and showing the popup windows are added with two audio tags. Autoplay and loop are not added, and they will be controlled in JavaScript later on. -->
+        <audio controls style="display:none;" id="get"><source src="./get.mp3"></audio>
+        <audio controls style="display:none;" id="modal"><source src="./modal.mp3"></audio>
+        <!-- Use the video tag to add the animation of background environment to the website, and let it play automatically and loop constantly. It's position and size will be adjusted with CSS later on. -->
+        <video class="video-background" src="./video/background.mp4" muted loop autoplay ></video>
+
+
+        <!-- I use separate divs to wrap each of the shell image. Adding the same class name and different id helps me conveniently control their size together and control their position individually in CSS . Onclick is added to each div to apply click event created in JavaScript later on. -->
+            <div class="shells" onclick="touchAmount('shell_1')" id="shell_1"><img src="./img/conch.png" alt=""></div>
+            <div class="shells" onclick="touchAmount('shell_2')" id="shell_2"><img src="./img/starfish-o.png" alt=""></div>
+            <div class="shells" onclick="touchAmount('shell_3')" id="shell_3"><img src="./img/starfish-lp.png" alt=""></div>
+            <div class="shells" onclick="touchAmount('shell_4')" id="shell_4"><img src="./img/shell.png" alt=""></div>
+            <div class="shells" onclick="touchAmount('shell_5')" id="shell_5"><img src="./img/conch.png" alt=""></div>
+            <div class="shells" onclick="touchAmount('shell_6')" id="shell_6"><img src="./img/starfish-p.png" alt=""></div>
+            <div class="shells" onclick="touchAmount('shell_7')" id="shell_7"><img src="./img/starfish-p.png" alt=""></div>
+            <div class="shells" onclick="touchAmount('shell_8')" id="shell_8"><img src="./img/starfish-o.png" alt=""></div>
+            <div class="shells" onclick="touchAmount('shell_9')" id="shell_9"><img src="./img/conch.png" alt=""></div>
+            <div class="shells" onclick="touchAmount('shell_10')" id="shell_10"><img src="./img/shell.png" alt=""></div>
+            <div class="shells" onclick="touchAmount('shell_11')" id="shell_11"><img src="./img/starfish-lp.png" alt=""></div>
+            <div class="shells" onclick="touchAmount('shell_12')" id="shell_12"><img src="./img/starfish-p.png" alt=""></div>
+            <div class="shells" onclick="touchAmount('shell_13')" id="shell_13"><img src="./img/starfish-o.png" alt=""></div>
+            <div class="shells" onclick="touchAmount('shell_14')" id="shell_14"><img src="./img/starfish-lp.png" alt=""></div>
+
+
+            <!-- I put the images of the necklace string in a div and add a class name to control its position with CSS later. -->
+            <div class="necklace"><img src="./img/necklace.png" alt=""></div>
+            <!-- I separated the foreground plants from the background to create parallax effect. I put the plant image in a div and add simple css with inline style to prepare for creating the parallax effect with JavaScript. -->
+            <div class="tree" style="pointer-events: none;width: 110%;"><img src="./img/tree.png" alt=""></div>
+            <!-- I use divs and buttons to build the elements and structure of the pop-up window, and add class names to adjust their style and positions with CSS. Onclick is added to the button, in order to create click event with JavaScript later. -->
+            <div class="modalBox">
+                <div class="con">
+                    <p>Congratulations!<br/>A new necklace has been made!</p>
+                    <div class="btn">
+                        <button onclick="giveAway(1)">Keep It</button>
+                        <button onclick="giveAway(2)">Give Away</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Finally, I create an empty div for placing the different GIF animations later with JavaScript -->
+            <div class="gifBox"></div>
+            
+            <script type="text/javascript" src="script.js"></script>
+</body>
+</html>
